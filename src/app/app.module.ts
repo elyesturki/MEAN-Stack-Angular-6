@@ -7,6 +7,8 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 import { BookCreateComponent } from './book-create/book-create.component';
 import { BookEditComponent } from './book-edit/book-edit.component';
 import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,6 @@ import { RouterModule, Routes } from '@angular/router';
     BookEditComponent
   ],
   imports: [
-    BrowserModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     FormsModule,
@@ -25,7 +26,7 @@ import { RouterModule, Routes } from '@angular/router';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  const appRoutes: Routes = [
+  const appRoutes Routes = [
     {
       path: 'books',
       component: BookComponent,
