@@ -3,19 +3,18 @@ import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError, tap, map } from 'rxjs/operators';
 
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+const apiUrl = '/api';
+
 @Injectable({
-  providedIn: 'root',
-  const httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
-  const apiUrl = "/api";
+  providedIn: 'root'
 })
 export class ApiService {
 
-  constructor() {
-    constructor(private http: HttpClient) { }
-
-   private handleError(error: HttpErrorResponse) {
+  constructor(private http: HttpClient) { }
+  private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
@@ -28,11 +27,12 @@ export class ApiService {
     }
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
-  };
+  }
   private extractData(res: Response) {
     let body = res;
     return body || { };
-  };
+  }
+
   getBooks(): Observable<any> {
     return this.http.get(apiUrl, httpOptions).pipe(
       map(this.extractData),
@@ -66,6 +66,5 @@ export class ApiService {
       .pipe(
         catchError(this.handleError)
       );
-    }
   }
 }
