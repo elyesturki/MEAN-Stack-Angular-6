@@ -15,10 +15,7 @@ app.use(express.static(path.join(__dirname, 'dist/mean-angular6')));
 app.use('/', express.static(path.join(__dirname, 'dist/mean-angular6')));
 app.use('/api', apiRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -32,3 +29,9 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/mean-angular6', { promiseLibrary: require('bluebird') })
+  .then(() =>  console.log('connection successful'))
+  .catch((err) => console.error(err));
